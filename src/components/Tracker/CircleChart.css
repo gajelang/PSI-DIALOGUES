@@ -1,0 +1,36 @@
+.circle-chart-container {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 500px; /* Sesuaikan lebar maksimum sesuai kebutuhan */
+    margin: auto;
+}
+
+.circle-chart {
+    position: relative;
+    text-align: center;
+}
+
+.circle-chart__svg {
+    width: 50px; /* Sesuaikan ukuran lingkaran grafik */
+    height: 50px; /* Sesuaikan ukuran lingkaran grafik */
+}
+
+.circle-chart__background {
+    stroke: #eaeaea; /* Warna garis latar belakang */
+}
+
+.circle-chart__circle {
+    stroke: #1ab7ea; /* Warna garis lingkaran */
+}
+
+.circle-chart__label {
+    font-size: 14px; /* Ukuran font label */
+    margin-top: 5px;
+}
+
+.circle-chart__value {
+    font-size: 16px; /* Ukuran font nilai */
+    font-weight: bold;
+    margin-top: 3px;
+}
