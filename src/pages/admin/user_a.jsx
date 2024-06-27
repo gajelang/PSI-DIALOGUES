@@ -1,5 +1,5 @@
 import React from 'react';
-import UserInfo from '../../components/Admin/userinfo';
+import UserInfo from '../../components/Admin/useradmin/userinfo';
 import MentorInfo from '../../components/Admin/mentorinfo';
 import { allEarningsData } from '../../data/allearnings';
 import EarningsInfo from '../../components/Admin/earningsinfo';

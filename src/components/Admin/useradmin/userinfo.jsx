@@ -1,6 +1,6 @@
 // src/components/userinfo.jsx
 import React, { useState, useEffect } from 'react';
-import { allUsersData } from '../../data/alluserdata';
+import { allUsersData } from '../../../data/alluserdata';
 
 const UserInfo = () => {
     const [totalUsers, setTotalUsers] = useState(0);
