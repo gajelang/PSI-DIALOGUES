@@ -1,8 +1,8 @@
 import React from 'react';
 import UserInfo from '../../components/Admin/useradmin/userinfo';
-import MentorInfo from '../../components/Admin/mentorinfo';
+import MentorInfo from '../../components/Admin/mentoradmin/mentorinfo';
 import { allEarningsData } from '../../data/allearnings';
-import EarningsInfo from '../../components/Admin/earningsinfo';
+import EarningsInfo from '../../components/Admin/earningsadmin/earningsinfo';
 
 const Home = () => {
     const handleLogout = () => {

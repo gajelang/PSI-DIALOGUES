@@ -1,6 +1,6 @@
 // src/components/earningsinfo.jsx
 import React, { useState, useEffect } from 'react';
-import { allEarningsData } from '../../data/allearnings';
+import { allEarningsData } from '../../../data/allearnings';
 
 const EarningsInfo = () => {
     const [totalEarnings, setTotalEarnings] = useState(0);

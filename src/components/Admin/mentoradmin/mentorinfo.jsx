@@ -1,6 +1,6 @@
 // src/components/mentorinfo.jsx
 import React, { useState, useEffect } from 'react';
-import { allMentorsData } from '../../data/allmentordata';
+import { allMentorsData } from '../../../data/allmentordata';
 
 const MentorInfo = () => {
     const [totalMentors, setTotalMentors] = useState(0);
