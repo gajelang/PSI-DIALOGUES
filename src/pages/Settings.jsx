@@ -1,9 +1,13 @@
-// src/components/Settings.jsx
 import React from 'react';
 import userData from '../data/UserData';
 
 const Settings = () => {
     const { fullName, username, email, education, dateOfBirth, phoneNumber } = userData;
+
+    const handleLogout = () => {
+        localStorage.removeItem('mode');
+        window.location.reload();
+    };
 
     return (
         <div className="ml-36 p-4 text-black">
@@ -88,12 +92,12 @@ const Settings = () => {
                     <h2 className="text-xl font-semibold mb-4">Account Settings</h2>
                     <div className="flex flex-row justify-between">
                         <h2>Switch Account?</h2>
-                        <a
-                            href="register.html"
+                        <button
+                            onClick={handleLogout}
                             className="bg-red-600 text-white px-6 py-2 rounded-lg mt-4 hover:bg-red-700"
                         >
                             LOG OUT
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>

@@ -1,11 +1,5 @@
 import React from 'react';
-import Sidebar from '../components/Sidebar';
 import ProfileButton from '../components/ProfileButton';
-import MentoringSchedule from '../components/MentoringSchedule'; // Import MentoringSchedule component
-import ProgressTracker from '../components/ProgressTracker';
-import SocialTalk from '../components/SocialTalk';
-import Mentoring from './Mentoring';
-import MainContent from '../components/Mentoring/MainContent';
 import ScheduleMentoring from '../components/Mentoring/ScheduleMentoring';
 import UserTracker from '../components/Tracker/UserTracker';
 
