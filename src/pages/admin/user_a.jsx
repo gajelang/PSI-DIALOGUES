@@ -18,7 +18,7 @@ const Home = () => {
             <div className="flex flex-row flex-1">
                 <div className="flex flex-col flex-1 ml-36">
                     <header className="flex justify-between items-center mt-4 w-full">
-                        <h1 className="text-4xl font-bold text-black">Dashboard</h1>
+                        <h1 className="text-4xl font-bold text-black">User Data</h1>
                     </header>
                     <main className="flex flex-col mt-10 mr-1">
                         <div className='flex justify-between gap-8'>
