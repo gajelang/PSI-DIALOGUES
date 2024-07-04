@@ -1,27 +1,35 @@
 import React, { useEffect, useState } from 'react';
 
-const HistoryMentoring = () => {
+const MentoringHistory = () => {
     const [history, setHistory] = useState([]);
-    const idLearner = 1; // Ganti dengan ID Learner yang sesuai
+    const idMentor = 1; // Ganti dengan ID Mentor yang sesuai
 
     useEffect(() => {
         const fetchHistory = async () => {
             try {
-                const response = await fetch(`https://dialogue-api.vercel.app/api/sesi/pastusersesi?IdLearner=${idLearner}`);
-                const data = await response.json();
-                setHistory(data);
-                console.log('Fetched History:', data);
+                const response = await fetch(`https://dialogue-api.vercel.app/api/sesi/pastmentorsesi?IdMentor=${idMentor}`);
+                const text = await response.text(); // Ambil respon sebagai teks
+                console.log('API Response Text:', text); // Log respon API sebagai teks
+
+                // Coba parsing teks sebagai JSON
+                try {
+                    const data = JSON.parse(text);
+                    setHistory(data);
+                    console.log('Fetched History:', data);
+                } catch (jsonError) {
+                    console.error('Error parsing JSON:', jsonError);
+                }
             } catch (error) {
                 console.error('Error fetching history:', error);
             }
         };
 
         fetchHistory();
-    }, [idLearner]);
+    }, [idMentor]);
 
     return (
         <div className="mt-8">
-            <div className="bg-[#1f168a] rounded-[10px] p-[15px]">
+            <div className="bg-[#1a1364] rounded-[10px] p-[15px]">
                 <div className="flex justify-between">
                     <div className="flex gap-4 items-center ml-3 text-white">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
@@ -57,9 +65,9 @@ const MentoringCard = ({ mentoring }) => {
                     </div>
                 </div>
                 <div className="flex flex-row items-center gap-6 md:gap-8">
-                <div>
-                        <p className="font-medium text-gray-700">Mentor</p>
-                        <p className="mt-1 text-lg font-semibold text-gray-900">{mentoring.mentorname}</p>
+                    <div>
+                        <p className="font-medium text-gray-700">Learner</p>
+                        <p className="mt-1 text-lg font-semibold text-gray-900">{mentoring.learnername}</p>
                     </div>
                     <div className="flex flex-col items-center">
                         <p className="font-medium text-gray-700">Date</p>
@@ -94,4 +102,4 @@ const MentoringCard = ({ mentoring }) => {
     );
 };
 
-export default HistoryMentoring;
+export default MentoringHistory;

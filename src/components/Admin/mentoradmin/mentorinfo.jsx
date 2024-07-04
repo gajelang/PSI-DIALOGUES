@@ -1,6 +1,4 @@
-// src/components/mentorinfo.jsx
 import React, { useState, useEffect } from 'react';
-import { allMentorsData } from '../../../data/allmentordata';
 
 const MentorInfo = () => {
     const [totalMentors, setTotalMentors] = useState(0);
@@ -8,20 +6,20 @@ const MentorInfo = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('YOUR_API_ENDPOINT_HERE');
+                const response = await fetch('https://dialogue-api.vercel.app/api/mentor/mentordata');
                 if (response.ok) {
                     const data = await response.json();
-                    const activeMentors = data.filter(mentor => mentor.status === 'active').length;
-                    setTotalMentors(activeMentors);
+                    const totalMentors = Object.keys(data).length;
+                    setTotalMentors(totalMentors);
                 } else {
-                    // Jika API tidak tersedia, gunakan data dummy
-                    const activeMentors = allMentorsData.filter(mentor => mentor.status === 'active').length;
-                    setTotalMentors(activeMentors);
+                    console.error('Failed to fetch data');
+                    // Jika API tidak tersedia, handle secara sesuai
+                    // Contoh: setTotalMentors(0) atau menampilkan pesan error
                 }
             } catch (error) {
-                // Jika terjadi error, gunakan data dummy
-                const activeMentors = allMentorsData.filter(mentor => mentor.status === 'active').length;
-                setTotalMentors(activeMentors);
+                console.error('Error fetching data:', error);
+                // Jika terjadi error, handle secara sesuai
+                // Contoh: setTotalMentors(0) atau menampilkan pesan error
             }
         };
 
@@ -33,7 +31,7 @@ const MentorInfo = () => {
             <div>
                 <div className="flex flex-col">
                     <h1 className='text-2xl font-bold'>Total Mentor</h1>
-                    <p className='text-gray-400'>Total All Active Mentor</p>
+                    <p className='text-gray-400'>Total All Mentor</p>
                 </div>
                 <h1 className='mt-3 font-extrabold text-5xl'>{totalMentors}</h1>
             </div>

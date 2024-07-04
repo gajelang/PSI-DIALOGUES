@@ -1,6 +1,6 @@
 // src/components/userinfo.jsx
 import React, { useState, useEffect } from 'react';
-import { allUsersData } from '../../../data/alluserdata';
+import { purchasedata } from '../../../data/purchasedata';
 
 const UserInfo = () => {
     const [totalUsers, setTotalUsers] = useState(0);
@@ -8,19 +8,22 @@ const UserInfo = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('YOUR_API_ENDPOINT_HERE');
+                const response = await fetch('https://dialogue-api.vercel.app/api/user/userdata');
                 if (response.ok) {
                     const data = await response.json();
-                    const activeUsers = data.filter(user => user.status === 'active').length;
+                    console.log('API fetch successful:', data);
+                    const activeUsers = data.filter(user => user.aktif).length;
                     setTotalUsers(activeUsers);
                 } else {
-                    // Jika API tidak tersedia, gunakan data dummy
-                    const activeUsers = allUsersData.filter(user => user.status === 'active').length;
+                    console.log('API fetch failed with status:', response.status);
+                    // Jika API tidak tersedia, gunakan data langganan
+                    const activeUsers = purchasedata.filter(purchase => new Date(purchase.end_date) >= new Date()).length;
                     setTotalUsers(activeUsers);
                 }
             } catch (error) {
-                // Jika terjadi error, gunakan data dummy
-                const activeUsers = allUsersData.filter(user => user.status === 'active').length;
+                console.log('API fetch error:', error);
+                // Jika terjadi error, gunakan data langganan
+                const activeUsers = purchasedata.filter(purchase => new Date(purchase.end_date) >= new Date()).length;
                 setTotalUsers(activeUsers);
             }
         };

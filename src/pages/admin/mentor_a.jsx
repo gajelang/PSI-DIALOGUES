@@ -2,7 +2,7 @@ import React from 'react';
 import UserInfo from '../../components/Admin/useradmin/userinfo';
 import MentorInfo from '../../components/Admin/mentoradmin/mentorinfo';
 import { allEarningsData } from '../../data/allearnings';
-import EarningsInfo from '../../components/Admin/earningsadmin/earningsinfo';
+import MentorList from '../../components/Admin/mentoradmin/MentorList';
 
 const Home = () => {
     const handleLogout = () => {
@@ -24,6 +24,7 @@ const Home = () => {
                         <div className='flex justify-between gap-8'>
                             <MentorInfo />
                         </div>
+                        <MentorList />
                     </main>
                 </div>
             </div>

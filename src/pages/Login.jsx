@@ -6,18 +6,28 @@ const Login = ({ setMode }) => {
       <div className="p-6 bg-white rounded shadow-md text-black">
         <h1 className="mb-4 text-2xl font-bold text-center">Choose Mode</h1>
         <div className="flex space-x-4">
-          <button 
+
+          <button
             className="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
             onClick={() => setMode('user')}
           >
             User
           </button>
-          <button 
+
+          <button
             className="px-4 py-2 font-bold text-white bg-green-500 rounded hover:bg-green-700"
             onClick={() => setMode('admin')}
           >
             Admin
           </button>
+
+          <button
+            className="px-4 py-2 font-bold text-white bg-orange-400 rounded hover:bg-orange-700"
+            onClick={() => setMode('mentor')}
+          >
+            Mentor
+          </button>
+
         </div>
       </div>
     </div>

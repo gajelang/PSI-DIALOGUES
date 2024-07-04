@@ -32,7 +32,7 @@ const App = () => {
   return (
     <div className="flex w-screen">
       <Sidebar setCurrentPage={setCurrentPage} currentPage={currentPage} />
-      <div className="flex-1 p-10">
+      <div className="flex-1 p-2">
         {renderPage()}
       </div>
     </div>

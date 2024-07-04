@@ -1,82 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import upcomingMentorings from '../../data/upcomingMentoring';
 
 const ScheduleMentoring = () => {
-  const [schedule, setSchedule] = useState(null);
-  const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
-  const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
+  const [schedule, setSchedule] = useState([]);
+  const idLearner = 1; // Ganti dengan ID Learner yang sesuai
 
   useEffect(() => {
-    // This part fetches real data from an API, replace with your actual API endpoint
     const fetchSchedule = async () => {
       try {
-        const response = await axios.get('https://api.example.com/schedule');
-        setSchedule(response.data);
+        const response = await fetch(`https://dialogue-api.vercel.app/api/sesi/futureusersesi?IdLearner=${idLearner}`);
+        const data = await response.json();
+        setSchedule(data);
+        console.log('Fetched Schedule:', data);
       } catch (error) {
         console.error('Error fetching schedule:', error);
       }
     };
 
-    // For demo purposes, using mock data instead of fetching from API
-    setSchedule(upcomingMentorings);
-  }, []);
-
-  // Function to get number of days in a given month and year
-  const daysInMonth = (month, year) => {
-    return new Date(year, month + 1, 0).getDate();
-  };
-
-  // Function to render calendar dates based on currentMonth and currentYear
-  const renderCalendarDates = () => {
-    const daysCount = daysInMonth(currentMonth, currentYear);
-    const calendarDates = [];
-
-    for (let i = 1; i <= daysCount; i++) {
-      const date = new Date(currentYear, currentMonth, i);
-      const formattedDate = date.toISOString().slice(0, 10);
-
-      let hasMentoring = false;
-      if (schedule) {
-        hasMentoring = schedule.some(item => item.date === formattedDate);
-      }
-
-      calendarDates.push(
-        <div
-          key={i}
-          className={`text-center font-medium ${hasMentoring ? 'bg-gray-300 rounded-full' : 'text-gray-600'}`}
-        >
-          {i}
-        </div>
-      );
-    }
-
-    return calendarDates;
-  };
-
-  // Function to handle navigation to previous month
-  const handlePrevMonth = () => {
-    setCurrentMonth(prevMonth => {
-      if (prevMonth === 0) {
-        setCurrentYear(year => year - 1);
-        return 11;
-      } else {
-        return prevMonth - 1;
-      }
-    });
-  };
-
-  // Function to handle navigation to next month
-  const handleNextMonth = () => {
-    setCurrentMonth(prevMonth => {
-      if (prevMonth === 11) {
-        setCurrentYear(year => year + 1);
-        return 0;
-      } else {
-        return prevMonth + 1;
-      }
-    });
-  };
+    fetchSchedule();
+  }, [idLearner]);
 
   return (
     <div className="mt-8">
@@ -88,69 +29,34 @@ const ScheduleMentoring = () => {
             </svg>
             <p className="text-[25px] text-white font-bold">Mentoring Schedule</p>
           </div>
-          <div className="flex items-center text-white">
-            <button className="cursor-pointer" onClick={handlePrevMonth}>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                <path strokeLinecap="round" strokeLinejoin="round" d="m11.25 9-3 3m0 0 3 3m-3-3h7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-              </svg>
-            </button>
-            <div id="currentMonthYear" className="text-lg font-bold mx-4">
-              {`${getMonthName(currentMonth)} ${currentYear}`}
-            </div>
-            <button className="cursor-pointer" onClick={handleNextMonth}>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                <path strokeLinecap="round" strokeLinejoin="round" d="m12.75 15 3-3m0 0-3-3m3 3h-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-              </svg>
-            </button>
-          </div>
         </div>
       </div>
-      <section className="mt-6 grid grid-cols-2 gap-6">
-        <div className="bg-white shadow-sm rounded-lg p-4">
-          <div className="py-7 px-5 grid grid-cols-7 gap-8" id="calendarDates">
-            <div className="text-center font-medium text-gray-600">MON</div>
-            <div className="text-center font-medium text-gray-600">TUE</div>
-            <div className="text-center font-medium text-gray-600">WED</div>
-            <div className="text-center font-medium text-gray-600">THU</div>
-            <div className="text-center font-medium text-gray-600">FRI</div>
-            <div className="text-center font-medium text-gray-600">SAT</div>
-            <div className="text-center font-medium text-gray-600">SUN</div>
-            {renderCalendarDates()}
-          </div>
-        </div>
-        <div className="bg-white shadow-sm rounded-lg p-4">
-          {schedule ? (
-            schedule.map((item, index) => (
-              <div key={index} className="my-2 bg-gray-50 p-4 rounded-xl">
+      <section className="mt-6">
+        {schedule.length > 0 ? (
+          <div className="grid grid-cols-1 gap-6 ">
+            {schedule.map((item, index) => (
+              <div key={index} className="bg-white shadow-sm rounded-lg p-8">
                 <div className="flex items-center gap-4 mb-2">
-                  <p className="text-sm text-gray-700">Mentor: <span className="font-semibold">{item.mentor}</span></p>
-                  <p className="text-sm text-gray-700">Date: <span className="font-semibold">{item.date}</span></p>
+                  <p className="text-sm text-gray-700">Mentor: <span className="font-semibold">{item.namamentor}</span></p>
+                  <p className="text-sm text-gray-700">Date: <span className="font-semibold">{new Date(item.datetime).toLocaleString()}</span></p>
                 </div>
                 <div className="mb-2">
                   <p className="text-sm text-gray-700">Theme:</p>
-                  <h2 className="text-lg font-semibold">{item.theme}</h2>
+                  <h2 className="text-3xl font-semibold">{item.theme}</h2>
                 </div>
                 <div className="flex items-center gap-4">
-                  <p className="text-sm text-gray-700">Via: <span className="font-semibold">{item.via}</span></p>
-                  <p className="text-sm text-gray-700">Meeting Link: <span className="font-semibold">{item.meetingLink}</span></p>
+                  <p className="text-sm text-gray-700">Via: <span className="font-semibold">Online</span></p>
+                  <p className="text-sm text-gray-700">Meeting Link: <a href={item.link} target="_blank" rel="noopener noreferrer" className="font-semibold text-blue-500">{item.link}</a></p>
                 </div>
               </div>
-            ))
-          ) : (
-            <p className="text-sm text-gray-700">No schedule available</p>
-          )}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <p className="text-sm text-gray-700 mt-4">No schedule available</p>
+        )}
       </section>
     </div>
   );
-};
-
-const getMonthName = (monthIndex) => {
-  const months = [
-    "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
-  ];
-  return months[monthIndex];
 };
 
 export default ScheduleMentoring;

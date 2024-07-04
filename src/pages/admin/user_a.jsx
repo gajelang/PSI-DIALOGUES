@@ -1,8 +1,7 @@
 import React from 'react';
+import UserStatistics from '../../components/Admin/useradmin/UserStatistics';
+import UserList from '../../components/Admin/useradmin/UserList';
 import UserInfo from '../../components/Admin/useradmin/userinfo';
-import MentorInfo from '../../components/Admin/mentoradmin/mentorinfo';
-import { allEarningsData } from '../../data/allearnings';
-import EarningsInfo from '../../components/Admin/earningsadmin/earningsinfo';
 
 const Home = () => {
     const handleLogout = () => {
@@ -21,8 +20,10 @@ const Home = () => {
                         <h1 className="text-4xl font-bold text-black">User Data</h1>
                     </header>
                     <main className="flex flex-col mt-10 mr-1">
-                        <div className='flex justify-between gap-8'>
+                        <div className='flex flex-col gap-8'>
                             <UserInfo />
+                            <UserStatistics />
+                            <UserList />
                         </div>
                     </main>
                 </div>
@@ -32,3 +33,4 @@ const Home = () => {
 };
 
 export default Home;
+
