@@ -6,7 +6,7 @@ const Recommendation = () => {
     useEffect(() => {
         const fetchRecommendations = async () => {
             try {
-                const response = await fetch('https://dialogue-api.vercel.app/api/user/userec?userID=1');
+                const response = await fetch('https://dialogue-api.vercel.app/api/user/userec?userID=2');
                 if (!response.ok) {
                     throw new Error('Failed to fetch recommendations');
                 }

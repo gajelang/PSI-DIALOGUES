@@ -10,7 +10,7 @@ const ApexChart = () => {
   const [history, setHistory] = useState([]);
 
   useEffect(() => {
-    const idLearner = 1; // Replace with your ID Learner
+    const idLearner = 2; // Replace with your ID Learner
     const fetchHistory = async () => {
       try {
         const response = await fetch(`https://dialogue-api.vercel.app/api/sesi/pastusersesi?IdLearner=${idLearner}`);
